@@ -74,28 +74,34 @@
             box-shadow: 0 4px 15px rgba(255, 107, 129, 0.3);
         }
 
+
+
         .numpad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+            max-width: 250px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .numpad button {
-            width: 70px;
-            height: 70px;
-            font-size: 24px;
-            background: linear-gradient(145deg, #ff6b81, #ff4757);
+            width: 60px;
+            height: 60px;
+            font-size: 22px;
+            font-weight: bold;
+            background: #ffadc6;
             border: none;
-            border-radius: 15px;
+            border-radius: 50%;
             color: white;
             cursor: pointer;
             font-family: 'Itim-Regular', cursive;
-            box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+            box-shadow: 0 4px 6px rgba(255, 107, 129, 0.3);
             transition: all 0.2s ease;
         }
 
@@ -103,6 +109,24 @@
             transform: scale(0.9);
             box-shadow: 0 2px 5px rgba(255, 107, 129, 0.3);
         }
+
+        .numpad button:last-child {
+            background: #ff6b81;
+            font-size: 26px;
+        }
+
+        /* Heart Icon for OK Button */
+        .numpad button:last-child::after {
+            content: " ❤️";
+        }
+
+        .numpad button.blank {
+            background: none;
+            border: none;
+            cursor: default;
+            opacity: 0; /* Hide visually */
+        }
+
 
         #backspace-btn {
             background: none;
@@ -116,10 +140,6 @@
         #backspace-btn:hover {
             color: #ff4757;
             transform: scale(1.1);
-        }
-
-        #backspace-btn:active {
-            transform: scale(0.9);
         }
 
         #error {
@@ -173,12 +193,7 @@
         .no-btn {
             background: linear-gradient(145deg, #555, #222);
             position: relative;
-        }
-
-        .no-btn:hover {
-            position: absolute;
-            top: calc(50% - 50px);
-            left: calc(50% + (Math.random() * 200 - 100) + px);
+            transition: transform 0.2s ease, font-size 0.2s ease, padding 0.2s ease;
         }
     </style>
 </head>
@@ -187,10 +202,11 @@
 
     <div id="pin-container">
         <h2>Enter Our Secret PIN!</h2>
-        <div style="position: relative; width: 80%; margin: 0 auto;">
-            <input type="password" id="pin" placeholder="???" readonly>
-            <button id="backspace-btn" onclick="deleteLastDigit()">⌫</button>
+        <div style="position: relative; width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+            <input type="password" id="pin" placeholder="???" readonly style="border: none; background-color: rgba(255, 255, 255, 0.6); padding: 15px; font-size: 24px; text-align: center; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); outline: none;">
+            <button id="backspace-btn" onclick="deleteLastDigit()" style="background: none; border: none; cursor: pointer; font-size: 24px; color: #ff6b81; transition: all 0.2s ease;">&#9003;</button> <!-- Backspace Icon -->
         </div>
+        
         <div class="numpad">
             <button onclick="addNumber(1)">1</button>
             <button onclick="addNumber(2)">2</button>
@@ -201,6 +217,7 @@
             <button onclick="addNumber(7)">7</button>
             <button onclick="addNumber(8)">8</button>
             <button onclick="addNumber(9)">9</button>
+            <button class="blank"></button> <!-- Blank space -->
             <button onclick="addNumber(0)">0</button>
             <button onclick="checkPin()">OK</button>
         </div>
@@ -209,14 +226,16 @@
 
     <div id="surprise-page" class="hidden">
         <h1>Will you be my valentine?💗😾</h1>
-        <img src="cute-cat-couple.gif" alt="Cute Cat Couple">
+        <img src="please-cat.gif" alt="Cute Cat Couple">
         <div class="button-container">
             <button class="btn yes-btn" onclick="yesResponse()">Yes 💖</button>
-            <button class="btn no-btn" onclick="noResponse()">No 😼</button>
+            <button class="btn no-btn" id="no-btn" onclick="noResponse()">No 😼</button>
         </div>
     </div>
 
     <script>
+        let noBtnSize = 22; // Initial font size
+
         function openPinContainer() {
             document.getElementById("heart-icon").style.display = "none";
             document.getElementById("pin-container").classList.add("open");
@@ -227,7 +246,7 @@
         }
 
         function deleteLastDigit() {
-            var pinInput = document.getElementById("pin");
+            let pinInput = document.getElementById("pin");
             pinInput.value = pinInput.value.slice(0, -1);
         }
 
@@ -239,12 +258,14 @@
         }
 
         function yesResponse() {
-            document.body.style.backgroundColor = "#ffb6c1";
             alert("Yay! 💕 Can't wait to celebrate with you!");
         }
 
         function noResponse() {
-            alert("Oops! Try again! 😆");
+            noBtnSize += 10;
+            let noBtn = document.getElementById("no-btn");
+            noBtn.style.fontSize = noBtnSize + "px";
+            noBtn.style.padding = (10 + noBtnSize / 4) + "px " + (20 + noBtnSize / 4) + "px";
         }
     </script>
 </body>
