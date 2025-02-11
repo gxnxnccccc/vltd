@@ -141,29 +141,44 @@
             display: none;
         }
 
-
-
-        .surprise-content {
+        .button-container {
+            margin-top: 20px;
             display: flex;
-            text-align: center;
-            padding: 20px;
+            justify-content: center;
+            gap: 20px;
         }
 
-        .letter {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1s forwards;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff6b81;
+        .btn {
+            font-family: 'Itim-Regular', cursive;
+            font-size: 22px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .yes-btn {
+            background: linear-gradient(145deg, #ff6b81, #ff4757);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145deg, #ff4757, #ff6b81);
+        }
+
+        .no-btn {
+            background: linear-gradient(145deg, #555, #222);
+            position: relative;
+        }
+
+        .no-btn:hover {
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% + (Math.random() * 200 - 100) + px);
         }
     </style>
 </head>
@@ -174,7 +189,7 @@
         <h2>Enter Our Secret PIN!</h2>
         <div style="position: relative; width: 80%; margin: 0 auto;">
             <input type="password" id="pin" placeholder="???" readonly>
-            <button id="backspace-btn" onclick="deleteLastDigit()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 24px; color: #ff6b81;">⌫</button>
+            <button id="backspace-btn" onclick="deleteLastDigit()">⌫</button>
         </div>
         <div class="numpad">
             <button onclick="addNumber(1)">1</button>
@@ -189,20 +204,22 @@
             <button onclick="addNumber(0)">0</button>
             <button onclick="checkPin()">OK</button>
         </div>
-        <p id="error" style="color: red; display: none;">Wrong PIN! Try again.</p>
+        <p id="error">Wrong PIN! Try again.</p>
     </div>
 
     <div id="surprise-page" class="hidden">
         <h1>Will you be my valentine?💗😾</h1>
-        <!-- <p class="letter">ตอบดีๆนะ</p> -->
-        <img src="cute-cat-couple.gif" alt="Your Image">
+        <img src="cute-cat-couple.gif" alt="Cute Cat Couple">
+        <div class="button-container">
+            <button class="btn yes-btn" onclick="yesResponse()">Yes 💖</button>
+            <button class="btn no-btn" onclick="noResponse()">No 😼</button>
+        </div>
     </div>
 
     <script>
         function openPinContainer() {
             document.getElementById("heart-icon").style.display = "none";
-            var pinContainer = document.getElementById("pin-container");
-            pinContainer.classList.add("open");
+            document.getElementById("pin-container").classList.add("open");
         }
 
         function addNumber(num) {
@@ -215,14 +232,19 @@
         }
 
         function checkPin() {
-            var pin = document.getElementById("pin").value;
-            if (pin === "2904") {
+            if (document.getElementById("pin").value === "2904") {
                 document.getElementById("pin-container").style.display = "none";
                 document.getElementById("surprise-page").style.display = "block";
-            } else {
-                document.getElementById("error").style.display = "block";
-                setTimeout(() => { document.getElementById("error").style.display = "none"; document.getElementById("pin").value = ""; }, 2000);
             }
+        }
+
+        function yesResponse() {
+            document.body.style.backgroundColor = "#ffb6c1";
+            alert("Yay! 💕 Can't wait to celebrate with you!");
+        }
+
+        function noResponse() {
+            alert("Oops! Try again! 😆");
         }
     </script>
 </body>
