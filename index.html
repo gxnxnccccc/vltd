@@ -81,14 +81,15 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0); /* Reduced opacity for clearer background */
             border-radius: 15px;
             padding: 15px;
-            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0);
             max-width: 250px;
             margin-left: auto;
             margin-right: auto;
         }
+
 
         .numpad button {
             width: 60px;
@@ -98,7 +99,7 @@
             background: #ffadc6;
             border: none;
             border-radius: 50%;
-            color: white;
+            color: black;
             cursor: pointer;
             font-family: 'Itim-Regular', cursive;
             box-shadow: 0 4px 6px rgba(255, 107, 129, 0.3);
@@ -203,7 +204,7 @@
     <div id="pin-container">
         <h2>Enter Our Secret PIN!</h2>
         <div style="position: relative; width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-            <input type="password" id="pin" placeholder="???" readonly style="border: none; background-color: rgba(255, 255, 255, 0.6); padding: 15px; font-size: 24px; text-align: center; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); outline: none;">
+            <input type="password" id="pin" placeholder="????" readonly style="border: none; background-color: rgba(255, 255, 255, 0.6); padding: 15px; font-size: 24px; text-align: center; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); outline: none;">
             <button id="backspace-btn" onclick="deleteLastDigit()" style="background: none; border: none; cursor: pointer; font-size: 24px; color: #ff6b81; transition: all 0.2s ease;">&#9003;</button> <!-- Backspace Icon -->
         </div>
         
