@@ -409,6 +409,14 @@
         function yesResponse() {
             let gif = document.getElementById("gif");
             gif.src = "yay-cat.gif"; // Change to yay-cat.gif
+
+            // Change the message
+            document.querySelector("#surprise-page h1").textContent = "You are now my valentine! 💖";
+
+            // Hide both buttons
+            document.querySelector(".yes-btn").style.display = "none";
+            document.querySelector(".no-btn").style.display = "none";
+
             setTimeout(() => {
                 alert("Yay! You are now my Puttood😼💕"); // Show the alert after 1 second
             }, 1000); // 1 second delay
