@@ -23,7 +23,23 @@
             height: 100vh;
         }
 
+        #message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center vertically */
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%); /* Ensure true centering */
+        }
+
+        #message {
+            margin-right: 10px; /* Add spacing between text and heart */
+        }
+
         #heart-icon {
+            display: block;
+            margin-top: 5px;
             font-size: 50px;
             color: red;
             cursor: pointer;
@@ -34,20 +50,30 @@
             transform: scale(1.2);
         }
 
+        
+
         #pin-container {
             opacity: 0;
             visibility: hidden;
             transform: scaleX(0);
             transform-origin: center;
             transition: transform 1s ease, opacity 1s ease, visibility 1s ease;
-            position: absolute;
+            position: relative; /* Change from absolute to relative */
             text-align: center;
+            width: 100%; /* Make sure it takes the full width */
+            height: auto; /* Allow it to adjust naturally */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
+
 
         #pin-container.open {
             opacity: 1;
             visibility: visible;
             transform: scaleX(1);
+            transition: opacity 1s ease, visibility 1s ease;
         }
 
         #pin-container h2 {
@@ -97,10 +123,10 @@
             height: 60px;
             font-size: 22px;
             font-weight: bold;
-            background: #ffadc6;
+            background: linear-gradient(145deg, #ff6b81, #ff4757);
             border: none;
             border-radius: 50%;
-            color: black;
+            color: whitesmoke;
             cursor: pointer;
             font-family: 'Itim-Regular', cursive;
             box-shadow: 0 4px 6px rgba(255, 107, 129, 0.3);
@@ -115,11 +141,6 @@
         .numpad button:last-child {
             background: #ff6b81;
             font-size: 26px;
-        }
-
-        Heart Icon for OK Button
-        .numpad button:last-child::after {
-            content: " ❤️";
         }
 
         .numpad button.blank {
@@ -150,6 +171,54 @@
             font-size: 18px;
             margin-top: 10px;
             animation: shake 0.5s ease;
+        }
+
+        #image-container {
+            display: flex;
+            flex-direction: column; /* Stack images vertically */
+            align-items: center; /* Center images */
+            gap: 10px; /* Adds space between images */
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        /* New button-container style for the final page */
+        #final-page .button-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px; /* Reduced gap */
+            flex-wrap: wrap; /* Allow buttons to wrap if screen is smaller */
+            max-width: 200px; /* Limit container width for better compactness */
+            margin-left: auto;
+            margin-right: auto; /* Center the container */
+        }
+
+        #final-page .btn {
+            font-family: 'Itim-Regular', cursive;
+            font-size: 18px; /* Smaller font size */
+            padding: 10px 20px; /* Reduced padding for shorter buttons */
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(145deg, #ff6b81, #ff4757);
+            width: 100%; /* Make buttons take full width */
+        }
+
+        #final-page .btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145deg, #ff4757, #ff6b81);
+        }
+
+        #gif {
+            max-width: 70%; /* Adjust the width as needed */
+            max-height: 300px; /* Set a max height if you want to limit the height */
+            width: auto; /* Maintain aspect ratio */
+            height: auto; /* Maintain aspect ratio */
         }
 
         @keyframes shake {
@@ -197,44 +266,72 @@
             position: relative;
             transition: transform 0.2s ease, font-size 0.2s ease, padding 0.2s ease;
         }
+
+        .side-image {
+            width: 80%; /* Adjust width as needed */
+            max-width: 300px; /* Optional: prevents images from being too large */
+        }
     </style>
 </head>
-<body>
-    <h2>This is for my babii</h2>
-    <div id="heart-icon" onclick="openPinContainer()">❤️</div>
 
-    <div id="pin-container">
-        <h2>Enter Our Secret PIN!</h2>
-        <div style="position: relative; width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-            <input type="password" id="pin" placeholder="????" readonly style="border: none; background-color: rgba(255, 255, 255, 0.6); padding: 15px; font-size: 24px; text-align: center; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); outline: none;">
-            <button id="backspace-btn" onclick="deleteLastDigit()" style="background: none; border: none; cursor: pointer; font-size: 24px; color: #ff6b81; transition: all 0.2s ease;">&#9003;</button> <!-- Backspace Icon -->
+<body>
+    <div id="image-container">
+        <img class="side-image" src="puttood/IMG_1056.JPG" alt="Image 1"> 
+        <img class="side-image" src="puttood/DSC03574.JPG" alt="Image 2"> 
+    </div>
+    
+    <div id="content-container">
+        <div id="message-container">
+            <h2 id="message">This is for my babii</h2>
+            <div id="heart-icon" onclick="openPinContainer()">❤️</div>
         </div>
-        
-        <div class="numpad">
-            <button onclick="addNumber(1)">1</button>
-            <button onclick="addNumber(2)">2</button>
-            <button onclick="addNumber(3)">3</button>
-            <button onclick="addNumber(4)">4</button>
-            <button onclick="addNumber(5)">5</button>
-            <button onclick="addNumber(6)">6</button>
-            <button onclick="addNumber(7)">7</button>
-            <button onclick="addNumber(8)">8</button>
-            <button onclick="addNumber(9)">9</button>
-            <button class="blank"></button> <!-- Blank space -->
-            <button onclick="addNumber(0)">0</button>
-            <button onclick="checkPin()">OK</button>
+    
+        <div id="pin-container">
+            <h2>Enter Our Secret PIN!</h2>
+            <div style="position: relative; width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                <input type="password" id="pin" placeholder="????" readonly>
+                <button id="backspace-btn" onclick="deleteLastDigit()">&#9003;</button>
+            </div>
+            <div class="numpad">
+                <button onclick="addNumber(1)">1</button>
+                <button onclick="addNumber(2)">2</button>
+                <button onclick="addNumber(3)">3</button>
+                <button onclick="addNumber(4)">4</button>
+                <button onclick="addNumber(5)">5</button>
+                <button onclick="addNumber(6)">6</button>
+                <button onclick="addNumber(7)">7</button>
+                <button onclick="addNumber(8)">8</button>
+                <button onclick="addNumber(9)">9</button>
+                <button class="blank"></button> 
+                <button onclick="addNumber(0)">0</button>
+                <button onclick="checkPin()">OK</button>
+            </div>
+            <p id="error">Wrong PIN! Try again.</p>
         </div>
-        <p id="error">Wrong PIN! Try again.</p>
     </div>
 
     <div id="surprise-page" class="hidden">
         <h1>Will you be my valentine?💗😾</h1>
-        <img src="please-cat.gif" alt="Cute Cat Couple">
+        <img id="gif" src="please-cat.gif" alt="Cute Cat Couple">
         <div class="button-container">
             <button class="btn yes-btn" onclick="yesResponse()">Yes 💖</button>
             <button class="btn no-btn" id="no-btn" onclick="noResponse()">No 😼</button>
         </div>
     </div>
+
+    <!-- New section to show after the Yes button -->
+    <div id="final-page" class="hidden">
+        <h1>Here's the next surprise!</h1>
+        <div class="button-container">
+            <button class="btn yes-btn" onclick="alert('Option 1 selected!')">Option 1</button>
+            <button class="btn yes-btn" onclick="alert('Option 2 selected!')">Option 2</button>
+            <button class="btn yes-btn" onclick="alert('Option 3 selected!')">Option 3</button>
+            <button class="btn yes-btn" onclick="alert('Option 4 selected!')">Option 4</button>
+        </div>
+    </div>
+
+
+
 
     <script>
         let noBtnSize = 22; // Initial font size
@@ -242,6 +339,9 @@
         function openPinContainer() {
             document.getElementById("heart-icon").style.display = "none";
             document.getElementById("pin-container").classList.add("open");
+            
+            // Hide the "This is for my babii" text
+            document.getElementById("message").style.display = "none";
         }
 
         function addNumber(num) {
@@ -255,20 +355,48 @@
 
         function checkPin() {
             if (document.getElementById("pin").value === "2904") {
-                document.getElementById("pin-container").style.display = "none";
-                document.getElementById("surprise-page").style.display = "block";
+                document.getElementById("pin-container").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("pin-container").style.display = "none";
+                    document.getElementById("surprise-page").style.display = "block";
+                }, 500);
+
+                // Hide images on the left after successful PIN entry
+                document.getElementById("image-container").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("image-container").style.display = "none";
+                }, 500);
             }
         }
 
+
         function yesResponse() {
-            alert("Yay! 💕 Can't wait to celebrate with you!");
+            let gif = document.getElementById("gif");
+            gif.src = "yay-cat.gif"; // Change to yay-cat.gif
+            setTimeout(() => {
+                alert("Yay! You are now my Puttood😼💕"); // Show the alert after 1 second
+            }, 1000); // 1 second delay
+
+            // Wait 2 seconds before moving to the final page
+            setTimeout(() => {
+                document.getElementById("surprise-page").style.display = "none"; // Hide the surprise page
+                document.getElementById("final-page").style.display = "block"; // Show the final page with buttons
+            }, 2000); // 2-second delay after the alert
         }
 
+
+
+
         function noResponse() {
-            noBtnSize += 10;
             let noBtn = document.getElementById("no-btn");
-            noBtn.style.fontSize = noBtnSize + "px";
-            noBtn.style.padding = (10 + noBtnSize / 4) + "px " + (20 + noBtnSize / 4) + "px";
+
+            if (noBtnSize > 10) { // Prevent the button from getting too small
+                noBtnSize -= 2;
+                noBtn.style.fontSize = noBtnSize + "px";
+                noBtn.style.padding = (5 + noBtnSize / 4) + "px " + (10 + noBtnSize / 4) + "px";
+            } else {
+                noBtn.innerText = "😿";
+            }
         }
     </script>
 </body>
