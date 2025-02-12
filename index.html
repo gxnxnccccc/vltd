@@ -352,9 +352,12 @@
 
     <!-- New section to show after the Yes button -->
     <div id="final-page" class="hidden">
+        <div id="image-container">
+            <img class="side-image" src="puttood/29ce1d0ce2444a31270de604d14da4b4.JPG" alt="Image 2"> 
+        </div>
         <h1 id="final-title">Here's the next surprise!</h1>
         <div id="button-container" class="button-container">
-            <button class="btn yes-btn" onclick="showTimer()">Option 1</button>
+            <button class="btn yes-btn" onclick="hideFinalImage(); showTimer()">Option 1</button>
             <button class="btn yes-btn" onclick="alert('Option 2 selected!')">Option 2</button>
             <button class="btn yes-btn" onclick="alert('Option 3 selected!')">Option 3</button>
             <button class="btn yes-btn" onclick="alert('Option 4 selected!')">Option 4</button>
@@ -365,7 +368,7 @@
             <img id="gif" src="ngum-cat.gif" alt="Cute Cat Couple">
             <h2>We've been together for:</h2>
             <p id="timer">Loading...</p>
-            <button class="back-btn" onclick="goBackFromTimer()">🔙 Back</button>
+            <button class="back-btn" onclick="showFinalImage(); goBackFromTimer()">🔙 Back</button>
         </div>
     </div>
 
@@ -416,6 +419,7 @@
             // Hide both buttons
             document.querySelector(".yes-btn").style.display = "none";
             document.querySelector(".no-btn").style.display = "none";
+            
 
             setTimeout(() => {
                 alert("Yay! You are now my Puttood😼💕"); // Show the alert after 1 second
@@ -445,6 +449,8 @@
             // Show the timer container and the back button
             document.getElementById("timer-container").classList.remove("hidden");
             startTimer();
+
+            document.getElementById("image-container").classList.add("hidden");
 
             // Hide the "Here's the next surprise!" message
             document.getElementById("final-title").style.display = "none";
@@ -483,6 +489,22 @@
             // Optionally, you can show other buttons again if they were hidden (for the final page)
             document.querySelectorAll("#final-page .btn").forEach(btn => btn.style.display = "inline-block");
         }
+
+        function hideFinalImage() {
+            const finalImageContainer = document.querySelector("#final-page #image-container");
+            if (finalImageContainer) {
+                finalImageContainer.style.display = "none";
+            }
+        }
+
+        function showFinalImage() {
+            const finalImageContainer = document.querySelector("#final-page #image-container");
+            if (finalImageContainer) {
+                finalImageContainer.style.display = "block"; // Or "flex" depending on your layout
+            }
+        }
+
+
     </script>
 </body>
 </html>
