@@ -50,8 +50,6 @@
             transform: scale(1.2);
         }
 
-        
-
         #pin-container {
             opacity: 0;
             visibility: hidden;
@@ -321,15 +319,23 @@
 
     <!-- New section to show after the Yes button -->
     <div id="final-page" class="hidden">
-        <h1>Here's the next surprise!</h1>
-        <div class="button-container">
-            <button class="btn yes-btn" onclick="alert('Option 1 selected!')">Option 1</button>
+        <h1 id="final-title">Here's the next surprise!</h1>
+        <div id="button-container" class="button-container">
+            <button class="btn yes-btn" onclick="showTimer()">Option 1</button>
             <button class="btn yes-btn" onclick="alert('Option 2 selected!')">Option 2</button>
             <button class="btn yes-btn" onclick="alert('Option 3 selected!')">Option 3</button>
             <button class="btn yes-btn" onclick="alert('Option 4 selected!')">Option 4</button>
         </div>
+    
+        <!-- 🔹 Timer Section (Initially Hidden) -->
+        <div id="timer-container" class="hidden">
+            <h2>We've been together for:</h2>
+            <p id="timer">Loading...</p>
+            <button class="btn back-btn" onclick="goBack()">🔙 Back</button>
+        </div>
     </div>
-
+    
+    
 
 
 
@@ -398,6 +404,29 @@
                 noBtn.innerText = "😿";
             }
         }
+
+        function showTimer() {
+            document.getElementById("timer-container").classList.remove("hidden");
+            startTimer();
+        }
+
+        function startTimer() {
+            const startDate = new Date("2024-04-29T00:00:00");
+            function updateTimer() {
+                const now = new Date();
+                const diff = now - startDate;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById("timer").textContent =
+                    `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
     </script>
 </body>
 </html>
