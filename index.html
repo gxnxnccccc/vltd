@@ -427,6 +427,15 @@
             setInterval(updateTimer, 1000);
         }
 
+        function goBack() {
+            // Hide the timer container
+            document.getElementById("timer-container").classList.add("hidden");
+
+            // Optionally, show the previous page or the final page (depending on your layout)
+            document.getElementById("final-page").style.display = "block"; // Show the final page again or another page
+        }
+
+
     </script>
 </body>
 </html>
