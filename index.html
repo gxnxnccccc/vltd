@@ -269,6 +269,39 @@
             width: 80%; /* Adjust width as needed */
             max-width: 300px; /* Optional: prevents images from being too large */
         }
+
+        .back-btn {
+            background: linear-gradient(145deg, #ff6b81, #ff4757); /* Gradient background */
+            font-family: 'Itim-Regular', cursive; /* Font style */
+            font-size: 22px; /* Font size */
+            padding: 10px 20px; /* Padding for button */
+            border: none; /* Remove border */
+            border-radius: 25px; /* Rounded corners */
+            color: white; /* Text color */
+            cursor: pointer; /* Pointer cursor */
+            transition: all 0.3s ease; /* Smooth transition */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+            text-transform: uppercase; /* Uppercase text */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between text and icon */
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1); /* Slight grow effect on hover */
+            background: linear-gradient(145deg, #ff4757, #ff6b81); /* Reverse gradient on hover */
+        }
+
+        .back-btn:active {
+            transform: scale(0.95); /* Slight shrink effect on click */
+        }
+
+        .back-btn .back-icon {
+            font-size: 24px; /* Icon size */
+        }
+
+
     </style>
 </head>
 
@@ -329,15 +362,12 @@
     
         <!-- 🔹 Timer Section (Initially Hidden) -->
         <div id="timer-container" class="hidden">
+            <img id="gif" src="ngum-cat.gif" alt="Cute Cat Couple">
             <h2>We've been together for:</h2>
             <p id="timer">Loading...</p>
-            <button class="btn back-btn" onclick="goBack()">🔙 Back</button>
+            <button class="back-btn" onclick="goBackFromTimer()">🔙 Back</button>
         </div>
     </div>
-    
-    
-
-
 
     <script>
         let noBtnSize = 22; // Initial font size
@@ -390,9 +420,6 @@
             }, 2000); // 2-second delay after the alert
         }
 
-
-
-
         function noResponse() {
             let noBtn = document.getElementById("no-btn");
 
@@ -406,8 +433,16 @@
         }
 
         function showTimer() {
+
+            // Show the timer container and the back button
             document.getElementById("timer-container").classList.remove("hidden");
             startTimer();
+
+            // Hide the "Here's the next surprise!" message
+            document.getElementById("final-title").style.display = "none";
+
+            // Hide the other option buttons
+            document.querySelectorAll("#final-page .btn").forEach(btn => btn.style.display = "none");
         }
 
         function startTimer() {
@@ -427,15 +462,19 @@
             setInterval(updateTimer, 1000);
         }
 
-        function goBack() {
+        function goBackFromTimer() {
             // Hide the timer container
             document.getElementById("timer-container").classList.add("hidden");
 
-            // Optionally, show the previous page or the final page (depending on your layout)
-            document.getElementById("final-page").style.display = "block"; // Show the final page again or another page
+            // Show the final page again
+            document.getElementById("final-page").style.display = "block"; 
+
+            // Optionally, you can re-show the "Here's the next surprise!" text if needed
+            document.getElementById("final-title").style.display = "block"; 
+
+            // Optionally, you can show other buttons again if they were hidden (for the final page)
+            document.querySelectorAll("#final-page .btn").forEach(btn => btn.style.display = "inline-block");
         }
-
-
     </script>
 </body>
 </html>
