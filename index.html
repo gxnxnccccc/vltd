@@ -301,7 +301,55 @@
             font-size: 24px; /* Icon size */
         }
 
+        .next-btn {
+            background: linear-gradient(145deg, #ff6b81, #ff4757); /* Same as Back button */
+            font-family: 'Itim-Regular', cursive;
+            font-size: 22px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
+        .next-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145deg, #ff4757, #ff6b81);
+        }
+
+        .next-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Message Box Styling */
+        #message-box {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22px;
+            font-family: 'Itim-Regular', cursive;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        #message-box.show {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
     </style>
 </head>
 
@@ -357,10 +405,7 @@
         </div>
         <h1 id="final-title">Here's the next surprise!</h1>
         <div id="button-container" class="button-container">
-            <button class="btn yes-btn" onclick="hideFinalImage(); showTimer()">Option 1</button>
-            <button class="btn yes-btn" onclick="alert('Option 2 selected!')">Option 2</button>
-            <button class="btn yes-btn" onclick="alert('Option 3 selected!')">Option 3</button>
-            <button class="btn yes-btn" onclick="alert('Option 4 selected!')">Option 4</button>
+            <button class="btn yes-btn" onclick="hideFinalImage(); showTimer()">click</button>
         </div>
     
         <!-- 🔹 Timer Section (Initially Hidden) -->
@@ -369,6 +414,12 @@
             <h2>We've been together for:</h2>
             <p id="timer">Loading...</p>
             <button class="back-btn" onclick="showFinalImage(); goBackFromTimer()">🔙 Back</button>
+            <button class="next-btn" onclick="hideFinalImage(); showMessage()">➡️ Next</button>
+        </div>
+
+        <!-- Message Box -->
+        <div id="message-box" class="hidden">
+            <p>You are my cutest Puttood! 💖</p>
         </div>
     </div>
 
@@ -504,7 +555,33 @@
             }
         }
 
+        function showMessage() {
+            // Hide the timer container and final page
+            document.getElementById("timer-container").classList.add("hidden");
+            document.getElementById("final-page").classList.add("hidden");
 
+            // Show the message box with animation
+            const messageBox = document.getElementById("message-box");
+            messageBox.classList.remove("hidden");
+            messageBox.classList.add("show");
+        }
+
+        // function showMessage() {
+        //     // Hide all other sections
+        //     document.getElementById("timer-container").style.display = "none";
+        //     document.getElementById("final-page").style.display = "none";
+
+        //     // // Hide after 3 seconds
+        //     // setTimeout(() => {
+        //     //     messageBox.classList.remove("show");
+        //     // }, 1000);
+
+        //     // Show the message box
+        //     messageBox.style.display = "block";
+        //     const messageBox = document.getElementById("message-box");
+        //     messageBox.classList.add("show");
+        // }
+        
     </script>
 </body>
 </html>
