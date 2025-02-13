@@ -350,6 +350,55 @@
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.1);
         }
+
+        .align-right {
+            text-align: right;
+            width: 100%;
+            display: block;
+            margin-top: 10px;
+        }
+
+        #falling-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .falling-item {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.8;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Video Background */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover; /* Ensures video fills the screen */
+            z-index: -2; /* Puts it behind everything */
+        }
+
+
     </style>
 </head>
 
@@ -405,23 +454,30 @@
         </div>
         <h1 id="final-title">Here's the next surprise!</h1>
         <div id="button-container" class="button-container">
-            <button class="btn yes-btn" onclick="hideFinalImage(); showTimer()">click</button>
+            <button class="btn yes-btn" onclick="hideFinalImage(); showTimer()">?</button>
         </div>
     
         <!-- 🔹 Timer Section (Initially Hidden) -->
         <div id="timer-container" class="hidden">
             <img id="gif" src="ngum-cat.gif" alt="Cute Cat Couple">
-            <h2>We've been together for:</h2>
+            <h1>We've been together for</h1>
             <p id="timer">Loading...</p>
+            <h2>and still counting!</h2>
             <button class="back-btn" onclick="showFinalImage(); goBackFromTimer()">🔙 Back</button>
             <button class="next-btn" onclick="hideFinalImage(); showMessage()">➡️ Next</button>
         </div>
 
-        <!-- Message Box -->
-        <div id="message-box" class="hidden">
-            <p>You are my cutest Puttood! 💖</p>
+        <div id="falling-effects">
+            <!-- Message Box -->
+            <div id="message-box" class="hidden">
+                <h3 style="color: rgb(226, 98, 119);">Happy valentines day na kub อ้วน</h3>
+                <p>เค้าไม่รู้ว่าเทอจะชอบมั้ย เค้ารู้สึกว่าเค้าทำได้ไม่ดีเท่าไหร่เลย</p>
+                <p>แต่เค้าตั้งใจทำให้เทอจริงๆนะ ถึงเค้าจะไม่เก่งเท่าไหร่ก็ตาม</p>
+                <p>เค้าหวังว่าเทอจะชอบนะงับ รอบหน้าเค้าจะทำให้เริ่ดกว่านี้อีก!</p>
+                <p>วาเลนไลน์ปีนี้เค้ามีเทอแล้ว ปีหน้าและปีต่อๆไปก็ขอให้ยังมีเทออยู่เหมือนเดิมนะ!</p>
+                <p class="align-right">from เกมมุ 💗 พัตตู้</p>
+            </div>
         </div>
-    </div>
 
     <script>
         let noBtnSize = 22; // Initial font size
@@ -566,21 +622,33 @@
             messageBox.classList.add("show");
         }
 
-        // function showMessage() {
-        //     // Hide all other sections
-        //     document.getElementById("timer-container").style.display = "none";
-        //     document.getElementById("final-page").style.display = "none";
+        function createFallingEffect() {
+            const container = document.getElementById("falling-effects");
+            const symbols = ["❤️", "💖", "✨", "💗", "🌟"]; // Hearts & Stars
+            const numItems = 15; // Number of falling elements
 
-        //     // // Hide after 3 seconds
-        //     // setTimeout(() => {
-        //     //     messageBox.classList.remove("show");
-        //     // }, 1000);
+            for (let i = 0; i < numItems; i++) {
+                let item = document.createElement("div");
+                item.classList.add("falling-item");
+                item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                item.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+                item.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random speed
+                item.style.fontSize = Math.random() * 20 + 15 + "px"; // Random size
+                item.style.animationDelay = Math.random() * 2 + "s"; // Random delay
+                
+                container.appendChild(item);
 
-        //     // Show the message box
-        //     messageBox.style.display = "block";
-        //     const messageBox = document.getElementById("message-box");
-        //     messageBox.classList.add("show");
-        // }
+                // Remove after animation ends
+                setTimeout(() => {
+                    item.remove();
+                }, 5000);
+            }
+        }
+
+        // Generate falling hearts & stars every 1 second
+        setInterval(createFallingEffect, 1000);
+
         
     </script>
 </body>
